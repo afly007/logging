@@ -1,0 +1,15 @@
+#=== Adonis Syslog Messages ===
+
+ADONIS_TAGGED_SYSLOG ^%{SYSLOGTIMESTAMP:adonis_timestamp} %{HOSTNAME} %{DATA:process}:
+
+# Common Particles
+ADONIS_DHCP_STATUS DHCPACK|DHCPINFORM|DHCPNAK|DHCPREQUEST|DHCPDISCOVER|DHCPOFFER|DHCPRELEASE
+
+ADONISDHCPREQUEST %{ADONIS_DHCP_STATUS:dhcp_status} for %{IP:dhcp_client_requested_ip} from %{MAC:dhcp_client_mac} \(%{DATA:dhcp_client_name}\) via %{GREEDYDATA:gateway}
+ADONISDHCPREQUEST2 %{ADONIS_DHCP_STATUS:dhcp_status} for %{IP:dhcp_client_requested_ip} from %{MAC:dhcp_client_mac} via %{GREEDYDATA:gateway}
+ADONISDHCPACK  %{ADONIS_DHCP_STATUS:dhcp_status} to %{IP:dhcp_client_ip} \(%{MAC:dhcp_client_mac}\) via %{GREEDYDATA:dhcp_interface}
+ADONISDHCPNACK  %{ADONIS_DHCP_STATUS:dhcp_status} on %{IP:dhcp_client_requested_ip} to %{MAC:dhcp_client_mac} via %{GREEDYDATA:gateway}
+ADONISDHCPDISCOVER %{ADONIS_DHCP_STATUS:dhcp_status} from %{MAC:dhcp_client_mac} \(%{DATA:dhcp_client_name}\) via %{IP:dhcp_gateway}
+ADONISDHCPDISCOVER2  %{ADONIS_DHCP_STATUS:dhcp_status} from %{MAC:dhcp_client_mac} via %{IP:dhcp_gateway}
+ADONISDHCPINFORM %{ADONIS_DHCP_STATUS:dhcp_status} from %{IP:dhcp_client_ip} via %{IP:gateway}
+ADONISDHCPOFFER  %{ADONIS_DHCP_STATUS:dhcp_status} on %{IP:dhcp_client_ip} to %{MAC:dhcp_client_mac} \(%{DATA:dhcp_client_name}\) via %{GREEDYDATA:gateway}

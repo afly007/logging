@@ -1,0 +1,16 @@
+#=== Aruba Syslog Messages ===
+
+ARUBA_TAGGED_SYSLOG ^%{SYSLOGTIMESTAMP:aruba_timestamp} %{HOSTNAME} %{DATA:error_location_process}\[%{DATA:error_location_processnumber}\]: <%{DATA:error_number}> <%{DATA:aruba_severity}> <%{DATA:aruba_host_name} %{IP:aruba_host_ip}>
+
+# Common Particles
+ARUBA_AAA_ACTION Selected|Reused
+
+ARUBA109005109019 LDAP Server %{DATA:ldap_server_name}: %{GREEDYDATA:ldap_message}
+ARUBA124038 %{ARUBA_AAA_ACTION:aaa_action} server %{DATA:aaa_server_name} for method=%{DATA:aaa_method}; user=%{DATA:user},  essid=%{DATA:essid}, domain=%{DATA:aaa_domain}, server-group=%{GREEDYDATA:aaa_server_group}
+ARUBA202085 No arp entry for ip address %{IP:wireless_ip} eth%{DATA:controller_phy_int}\.%{GREEDYDATA:controller_vlan}
+ARUBA522008 User Authentication Successful: username=%{DATA:username} MAC=%{MAC:wireless_mac} IP=%{IP:wireless_ip} role=%{DATA:aruba_role} VLAN=%{DATA:wireless_vlan} AP=%{DATA:ap_name} SSID=%{DATA:ssid} profile=%{DATA:aruba_profile} auth method=%{DATA:aruba_auth_method} auth server=%{GREEDYDATA:aruba_auth_server}
+ARUBA124003 Authentication result=%{DATA:authentication_result}, method=%{DATA:authentication_method}, server=%{DATA:authentication_server}, user=%{MAC:user}
+ARUBA132197 Maximum number of retries was attempted for station  %{MAC} %{MAC}, deauthenticating the station
+ARUBA522010 MAC=%{MAC} IP=%{IP:wireless_ip} User de-authenticated: name=%{DATA:user}, cause=%{GREEDYDATA:deauth_cause}
+ARUBA522042 User Authentication Failed: username=%{DATA:username} MAC=%{MAC:wireless_mac} IP=%{IP:wireless_ip} auth method=%{DATA:aruba_auth_method} auth server=%{GREEDYDATA:aruba_auth_server}
+ARUBA132207 RADIUS reject for station %{DATA:user} %{MAC} from server %{GREEDYDATA:aaa_server}.
